@@ -3,13 +3,13 @@ import {SiEthereum} from "react-icons/si";
 import {BsInfoCircle} from "react-icons/bs";
 import {useTransactionContext} from "../contexts/TransactionContext";
 import {shortenAddress} from "../utils/shortenAddress";
+import Loader from "./Loader";
 
 const Welcome = () => {
 
-    const {connectWallet, currentAccount, message, setMessage, keyword, setKeyword, amount, setAmount, addressTo, setAddressTo, sendTransaction} = useTransactionContext();
+    const {isLoading, connectWallet, currentAccount, message, setMessage, keyword, setKeyword, amount, setAmount, addressTo, setAddressTo, sendTransaction} = useTransactionContext();
 
     const handleSubmit = () => {
-        console.log("clicked");
         sendTransaction();
     }
 
@@ -46,7 +46,7 @@ const Welcome = () => {
                         </div>
 
                         <div className={""}>
-                            <p className={"text-white font-light text-sm"}>{shortenAddress(currentAccount)}</p>
+                            {currentAccount ? <p className={"text-white font-light text-sm"}>{shortenAddress(currentAccount)}</p> : <p className={"text-white font-light text-sm"}>Address</p>}
                             <p className={"text-white font-semibold text-lg mt-1"}>Ethereum</p>
                         </div>
                     </div>
@@ -60,9 +60,7 @@ const Welcome = () => {
 
                         <div className={"h-[1px] w-full bg-gray-400 "}/>
 
-                        {/*@Todo add a loader to track the loading state. */}
-                        <button onClick={handleSubmit} className={" border border-[#3d4f7c] p-2 rounded-2xl cursor-pointer text-white w-full"}>Send now</button>
-
+                        {isLoading ? <Loader /> : <button onClick={handleSubmit} className={" border border-[#3d4f7c] p-2 rounded-2xl cursor-pointer text-white w-full"}>Send now</button>}
                     </div>
 
                 </div>
