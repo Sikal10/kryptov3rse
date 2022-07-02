@@ -7,16 +7,15 @@ import Footer from "./components/Footer";
 
 function App() {
     return (
-        <div>
+        <>
             <div className={"gradient-bg-welcome"}>
                 <Navbar/>
                 <Welcome/>
             </div>
-
             <Services/>
             <Transactions />
             <Footer />
-        </div>
+        </>
     );
 }
 
